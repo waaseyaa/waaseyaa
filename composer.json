@@ -5,24 +5,43 @@
     "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=8.3",
-        "waaseyaa/foundation": "^0.1",
+        "waaseyaa/access": "^0.1",
+        "waaseyaa/ai-agent": "^0.1",
+        "waaseyaa/ai-pipeline": "^0.1",
+        "waaseyaa/ai-schema": "^0.1",
+        "waaseyaa/ai-vector": "^0.1",
+        "waaseyaa/api": "^0.1",
+        "waaseyaa/cache": "^0.1",
+        "waaseyaa/cli": "^0.1",
+        "waaseyaa/config": "^0.1",
+        "waaseyaa/database-legacy": "^0.1",
         "waaseyaa/entity": "^0.1",
         "waaseyaa/entity-storage": "^0.1",
-        "waaseyaa/access": "^0.1",
-        "waaseyaa/user": "^0.1",
-        "waaseyaa/node": "^0.1",
-        "waaseyaa/taxonomy": "^0.1",
+        "waaseyaa/field": "^0.1",
+        "waaseyaa/foundation": "^0.1",
+        "waaseyaa/github": "^0.1",
+        "waaseyaa/i18n": "^0.1",
+        "waaseyaa/mail": "^0.1",
         "waaseyaa/media": "^0.1",
-        "waaseyaa/path": "^0.1",
         "waaseyaa/menu": "^0.1",
-        "waaseyaa/workflows": "^0.1",
-        "waaseyaa/api": "^0.1",
+        "waaseyaa/node": "^0.1",
+        "waaseyaa/note": "^0.1",
+        "waaseyaa/path": "^0.1",
+        "waaseyaa/plugin": "^0.1",
+        "waaseyaa/queue": "^0.1",
+        "waaseyaa/relationship": "^0.1",
         "waaseyaa/routing": "^0.1",
-        "waaseyaa/config": "^0.1",
-        "waaseyaa/cli": "^0.1",
-        "waaseyaa/database-legacy": "^0.1",
-        "waaseyaa/cache": "^0.1",
-        "waaseyaa/field": "^0.1"
+        "waaseyaa/search": "^0.1",
+        "waaseyaa/ssr": "^0.1",
+        "waaseyaa/state": "^0.1",
+        "waaseyaa/taxonomy": "^0.1",
+        "waaseyaa/typed-data": "^0.1",
+        "waaseyaa/user": "^0.1",
+        "waaseyaa/validation": "^0.1",
+        "waaseyaa/workflows": "^0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
@@ -36,7 +55,8 @@
     "scripts": {
         "post-create-project-cmd": [
             "chmod +x bin/waaseyaa"
-        ]
+        ],
+        "test": "phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
