@@ -6,7 +6,6 @@
     "require": {
         "php": ">=8.3",
         "waaseyaa/access": "^0.1",
-        "waaseyaa/admin-bridge": "^0.1",
         "waaseyaa/admin-surface": "^0.1",
         "waaseyaa/ai-agent": "^0.1",
         "waaseyaa/ai-pipeline": "^0.1",
