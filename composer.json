@@ -12,6 +12,7 @@
         "waaseyaa/ai-schema": "^0.1",
         "waaseyaa/ai-vector": "^0.1",
         "waaseyaa/api": "^0.1",
+        "waaseyaa/auth": "^0.1",
         "waaseyaa/cache": "^0.1",
         "waaseyaa/cli": "^0.1",
         "waaseyaa/cms": "^0.1",
