@@ -43,6 +43,7 @@
         "waaseyaa/node": "^0.1",
         "waaseyaa/note": "^0.1",
         "waaseyaa/notification": "^0.1",
+        "waaseyaa/oauth-provider": "^0.1",
         "waaseyaa/path": "^0.1",
         "waaseyaa/plugin": "^0.1",
         "waaseyaa/queue": "^0.1",
