@@ -63,3 +63,8 @@ if (!$hasAdminPackage) {
     echo "  Optional: set \033[33mWAASEYAA_ADMIN_PATH\033[0m to a Nuxt admin package for live-reload UI.\n";
 }
 echo "\n";
+
+$manifestCompiler = $root . '/vendor/bin/waaseyaa';
+if (is_file($manifestCompiler)) {
+    passthru(PHP_BINARY . ' ' . escapeshellarg($manifestCompiler) . ' optimize:manifest');
+}
