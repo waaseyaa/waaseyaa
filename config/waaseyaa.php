@@ -15,6 +15,23 @@ return [
     // Override with APP_ENV env var. Values: local, dev, development, staging, production.
     'environment' => getenv('APP_ENV') ?: 'production',
 
+    // RFC 9727 API Catalog. The public route exists only when a canonical
+    // HTTPS base URL and at least one installed public API contribution exist.
+    // APP_URL is never inferred from the request Host header.
+    'api_catalog' => [
+        'enabled' => getenv('APP_URL') !== false && getenv('APP_URL') !== '',
+        'base_url' => getenv('APP_URL') ?: '',
+    ],
+
+    // Experimental ARD v0.9 / AI Catalog 1.0 discovery. Off by default.
+    // When enabled, add 2-5 public representative queries per installed key,
+    // such as `mcp:public`; never include private prompts or real user data.
+    'ai_catalog' => [
+        'enabled' => false,
+        'base_url' => getenv('APP_URL') ?: '',
+        'representative_queries' => [],
+    ],
+
     // WAASEYAA_APP_SECRET is intentionally consumed directly by the kernel
     // before database boot. Do not copy master or derived key bytes into config.
 
