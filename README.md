@@ -9,9 +9,22 @@ A Waaseyaa CMS application.
 ```bash
 composer create-project waaseyaa/waaseyaa my-app --stability=dev
 cd my-app
+./vendor/bin/waaseyaa site:init
+.ci/site-verify
 ```
 
 Use `./vendor/bin/waaseyaa` for the CLI. Optional path-linked `waaseyaa/*` checkouts: copy `composer.local.json.example` to `composer.local.json` (see [docs/local-dev.md](docs/local-dev.md)).
+
+`site:init` records the site's product decisions and generates supported
+content, subscription, and governed-authoring integrations. The page builder
+is one shared revisioned service used by both the generic Admin SPA and an
+enabled Anokii shell. High-volume Updates, Events, Jobs, and Announcements use
+their faster typed content forms and can be placed on pages through governed
+listing blocks.
+
+`.ci/site-verify` is the local, provider-neutral verification boundary. The
+included GitHub workflow merely calls it; another hosted or local runner can do
+the same without changing the application contract.
 
 ## Directory Structure
 
@@ -57,6 +70,8 @@ composer run dev                    # Serve on FrankenPHP at http://127.0.0.1:80
 ./vendor/bin/waaseyaa optimize:manifest  # Rebuild provider manifest
 ./vendor/bin/waaseyaa serve              # Single-worker php -S dev server (zero-config; not for the admin SPA's SSE or production)
 ./vendor/bin/waaseyaa                    # CLI
+./vendor/bin/waaseyaa site:init          # Initialize/regenerate the governed site contract
+.ci/site-verify                          # Offline provider-neutral site verification
 ./bin/maintenance/waaseyaa-audit-site    # Optional convergence preflight
 ```
 
@@ -65,6 +80,13 @@ composer run dev                    # Serve on FrankenPHP at http://127.0.0.1:80
 This app defaults to a **SQLite** database (`storage/waaseyaa.sqlite`), so the PHP
 runtime must have **`pdo_sqlite`** and **`sqlite3`** (and `sodium`). These are
 declared in `composer.json`, so `composer install` flags a runtime missing them.
+
+The S1 production topology is one application node and one authoritative local
+SQLite file. File-backed connections verify WAL, foreign keys, and a bounded
+5000 ms busy timeout. Do not configure a database DSN, UNC/network share,
+replica, or `:memory:` production database. A separate search database, when
+configured, is only a non-authoritative rebuildable projection and obeys the
+same local SQLite connection contract.
 
 ### Serving with FrankenPHP (`composer run dev`)
 

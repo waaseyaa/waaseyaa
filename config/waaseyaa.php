@@ -46,8 +46,13 @@ return [
     // Set an explicit path here to override both.
     'database' => null,
 
-    // Config sync directory. Override with WAASEYAA_CONFIG_DIR env var.
-    'config_dir' => getenv('WAASEYAA_CONFIG_DIR') ?: __DIR__ . '/sync',
+    // Desired-state configuration bundle. Runtime reads the active database
+    // generation, never this directory. Override only with the canonical
+    // WAASEYAA_CONFIG_SYNC_PATH bootstrap selector.
+    'config' => [
+        'sync_path' => null,
+        'allow_external_sync_path' => false,
+    ],
 
     // File storage root for LocalFileRepository (media package).
     'files_dir' => getenv('WAASEYAA_FILES_DIR') ?: __DIR__ . '/../storage/files',
@@ -57,6 +62,14 @@ return [
     'jwt_secret' => getenv('WAASEYAA_JWT_SECRET') ?: '',
     // API key map: raw key => uid. Example: ['dev-machine-key' => 1].
     'api_keys' => [],
+    // Optional application-declared operational fields that must stay absent
+    // from every generic Admin and JSON:API read/query surface. Framework
+    // migration bookkeeping is already included; applications add exact
+    // entity-type/field names here rather than configuring each surface.
+    // 'entity' => [
+    //     'internal_fields_by_type' => ['node' => ['legacy_origin']],
+    // ],
+
 
     // Optional closed-world generic JSON:API entity-type policy. When this key
     // is absent, package/app `api: true` declarations retain their current
@@ -132,7 +145,12 @@ return [
         'embedding_provider' => getenv('WAASEYAA_EMBEDDING_PROVIDER') ?: '',
         'ollama_endpoint' => getenv('WAASEYAA_OLLAMA_ENDPOINT') ?: 'http://127.0.0.1:11434/api/embeddings',
         'ollama_model' => getenv('WAASEYAA_OLLAMA_MODEL') ?: 'nomic-embed-text',
-        'openai_api_key' => getenv('OPENAI_API_KEY') ?: '',
+        'openai_credential_reference' => [
+            'provider' => getenv('WAASEYAA_OPENAI_SECRET_PROVIDER') ?: '',
+            'identifier' => getenv('WAASEYAA_OPENAI_SECRET_ID') ?: '',
+            'secret_class' => 'provider-credential',
+            'purpose' => 'waaseyaa.ai.embedding.v1',
+        ],
         'openai_embedding_model' => getenv('WAASEYAA_OPENAI_EMBEDDING_MODEL') ?: 'text-embedding-3-small',
         // Per-entity field selection used for embedding text extraction.
         'embedding_fields' => [

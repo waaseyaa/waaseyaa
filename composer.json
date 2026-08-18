@@ -8,7 +8,7 @@
         "ext-sqlite3": "*",
         "php": ">=8.5",
         "symfony/dotenv": "^8.0",
-        "waaseyaa/framework": "^0.1.0-alpha.293"
+        "waaseyaa/framework": "^0.1.0-alpha.294"
     },
     "autoload": {
         "psr-4": {
@@ -34,6 +34,7 @@
     },
     "scripts": {
         "audit-site": "./bin/maintenance/waaseyaa-audit-site",
+        "site-verify": ".ci/site-verify",
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "@php vendor/bin/waaseyaa dev"
@@ -46,6 +47,8 @@
     "extra": {
         "merge-plugin": {
             "include": [
+                "composer.site-recipes.json",
+                "composer.subscription-recipe.json",
                 "composer.local.json"
             ],
             "prepend-repositories": true
