@@ -26,6 +26,10 @@ listing blocks.
 included GitHub workflow merely calls it; another hosted or local runner can do
 the same without changing the application contract.
 
+Before customizing the application, read [Application anatomy and ownership](docs/application-anatomy.md).
+It maps common framework concepts to their supported application extension
+points and makes the security boundary explicit.
+
 ## Directory Structure
 
 ```
@@ -145,6 +149,12 @@ SSE), run FrankenPHP natively against the committed `config/frankenphp/`:
 ```bash
 PHP_INI_SCAN_DIR="$PWD/config/frankenphp" frankenphp run --config config/frankenphp/Caddyfile
 ```
+
+The committed Caddy worker block sets `WAASEYAA_FRANKENPHP_WORKER=1` only in
+the worker process. The front controller never infers worker mode from
+`frankenphp_handle_request()` existing, because classic FrankenPHP exposes that
+function too. Classic `php-server`, PHP-FPM, and `php -S` therefore always use
+the single-request path.
 
 Use `PHP_INI_SCAN_DIR` (additive), **never** `PHPRC` — `PHPRC` *replaces* the
 runtime's bundled `php.ini`, which on shared-extension builds (e.g. the official
